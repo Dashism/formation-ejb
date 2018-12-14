@@ -13,4 +13,12 @@
 		<artifactId>formation-ejb</artifactId>
 		<version>1.0.0</version>
 	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>fr.formation.formation-ejb</groupId>
+			<artifactId>server</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
 </project>
