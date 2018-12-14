@@ -1,9 +1,14 @@
 package fr.formation.ejb.server;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 /**
  * Implémentation de l'interface distance FormationUtil utilisant uniquement
  * Java SE.
  */
+@Stateless
+@Remote(FormationUtilRemote.class)
 public class FormationUtilBean implements FormationUtilRemote {
 
 	/**
