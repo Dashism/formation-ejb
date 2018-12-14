@@ -13,7 +13,13 @@ public class FormationUtilBean implements FormationUtilRemote {
 	@Override
 	public boolean isRoundNumber(String str) {
 		boolean result = true;
-		// TODO Auto-generated method stub
+		if (str == null) {
+			result = false;
+		} else if (str.isEmpty()) {
+			result = false;
+		} else if (!str.matches("^-?[0-9]+$")) {
+			result = false;
+		}
 		return result;
 	}
 
