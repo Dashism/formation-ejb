@@ -50,6 +50,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ejb-plugin</artifactId>
+                <version>2.5.1</version>
                 <configuration>
                     <ejbVersion>3.2</ejbVersion>
                     <!-- this is false by default -->

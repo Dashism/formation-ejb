@@ -24,7 +24,12 @@ public class FormationUtilTest implements Runnable {
 		if (this.formationUtil != null) {
 			// On a bien récupéré l'EJB à distance.
 			System.out.println("L'EJB est bien récupéré !");
-			// TODO: Tester la méthode isRoundNumber.
+			if (this.formationUtil.isRoundNumber("42")) {
+				System.out.println("La chaine '42' est un nombre !");
+			}
+			if (!this.formationUtil.isRoundNumber("a12")) {
+				System.out.println("La chaine 'a12' n'est pas un nombre !");
+			}
 		} else {
 			// L'EJB n'a pas pu être récupéré.
 			System.out.println("L'EJB pour l'interface distance "
