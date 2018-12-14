@@ -4,21 +4,31 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>fr.formation.formation-ejb</groupId>
 	<artifactId>client</artifactId>
-	
+
 	<parent>
 		<groupId>fr.formation</groupId>
 		<artifactId>formation-ejb</artifactId>
 		<version>1.0.0</version>
 	</parent>
-	
+
 	<dependencies>
+		<dependency>
+			<groupId>org.jboss.eap</groupId>
+			<artifactId>wildfly-ejb-client-bom</artifactId>
+			<version>7.1.0.GA-redhat-11</version>
+			<type>pom</type>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>fr.formation.formation-ejb</groupId>
 			<artifactId>server</artifactId>
 			<version>1.0.0</version>
+			<!-- Dépendance uniquement vers la partie ejb-client de notre projet serveur 
+				c'est à dire l'interface FormationUtilRemote seulement. -->
+			<type>ejb-client</type>
 		</dependency>
 	</dependencies>
 </project>

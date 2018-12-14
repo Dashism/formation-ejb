@@ -1,8 +1,16 @@
 package fr.formation.ejb.client;
 
+import java.util.Hashtable;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import fr.formation.ejb.server.FormationUtilRemote;
 
 public class FormationUtilTest implements Runnable {
+
+	private static final String HTTP = "http";
 
 	public static void main(String[] args) {
 		new FormationUtilTest().run();
@@ -25,7 +33,27 @@ public class FormationUtilTest implements Runnable {
 	}
 
 	private FormationUtilRemote lookupEJB() {
-		// TODO Auto-generated method stub
+		final Hashtable<String, String> jndiProperties = new Hashtable<String, String>();
+		jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY,
+				"org.wildfly.naming.client.WildFlyInitialContextFactory");
+		if (Boolean.getBoolean(HTTP)) {
+			// use HTTP based invocation. Each invocation will be a HTTP request
+			jndiProperties.put(Context.PROVIDER_URL,
+					"http://localhost:8080/wildfly-services");
+		} else {
+			// use HTTP upgrade, an initial upgrade requests is sent to upgrade
+			// to the remoting protocol
+			jndiProperties.put(Context.PROVIDER_URL,
+					"remote+http://localhost:8080");
+		}
+		try {
+			final Context context = new InitialContext(jndiProperties);
+			return (FormationUtilRemote) context
+					.lookup("ejb:/formation-ejb-server/FormationUtilBean!"
+							+ FormationUtilRemote.class.getName());
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
